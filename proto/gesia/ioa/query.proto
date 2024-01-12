@@ -1,4 +1,5 @@
 syntax = "proto3";
+
 package gesia.ioa;
 
 import "amino/amino.proto";
@@ -6,25 +7,41 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "gesia/ioa/params.proto";
+import "gesia/ioa/internally_owned_account.proto";
 
 option go_package = "github.com/jinpk/gesia/x/ioa/types";
 
 // Query defines the gRPC querier service.
 service Query {
+  
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/jinpk/gesia/ioa/params";
+  
+  }
+  
+  // Queries a list of ListInternallyOwnedAccounts items.
+  rpc ListInternallyOwnedAccounts (QueryListInternallyOwnedAccountsRequest) returns (QueryListInternallyOwnedAccountsResponse) {
+    option (google.api.http).get = "/jinpk/gesia/ioa/list_internally_owned_accounts";
+  
   }
 }
-
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
+  
   // params holds all the parameters of this module.
-  Params params = 1 [
-    (gogoproto.nullable) = false,
-    (amino.dont_omitempty) = true
-  ];
+  Params params = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
 }
+
+message QueryListInternallyOwnedAccountsRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryListInternallyOwnedAccountsResponse {
+  repeated InternallyOwnedAccount   internallyOwnedAccounts = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination              = 2;
+}
+

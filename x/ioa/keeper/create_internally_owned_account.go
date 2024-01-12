@@ -1,6 +1,7 @@
 package keeper
 
 import (
+	"context"
 	"time"
 
 	"cosmossdk.io/store/prefix"
@@ -11,7 +12,8 @@ import (
 )
 
 /** IOA 생성 */
-func (k Keeper) CreateInternallyOwnedAccount(ctx sdk.Context, withdrawal sdk.AccAddress, contractAddress string) (error, types.InternallyOwnedAccount) {
+func (k Keeper) CreateInternallyOwnedAccount(goCtx context.Context, withdrawal sdk.AccAddress, contractAddress string) (error, types.InternallyOwnedAccount) {
+	ctx := sdk.UnwrapSDKContext(goCtx)
 	key := append([]byte("ioa"), sdk.Uint64ToBigEndian(uint64(time.Now().Unix()))...)
 	var ioaAddress sdk.AccAddress = address.Module(types.ModuleName, key)
 
