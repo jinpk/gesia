@@ -69,6 +69,9 @@ import (
 	ibcfeetypes "github.com/cosmos/ibc-go/v8/modules/apps/29-fee/types"
 	ibctransfertypes "github.com/cosmos/ibc-go/v8/modules/apps/transfer/types"
 	ibcexported "github.com/cosmos/ibc-go/v8/modules/core/exported"
+	ioamodulev1 "github.com/jinpk/gesia/api/gesia/ioa/module"
+	_ "github.com/jinpk/gesia/x/ioa/module" // import for side-effects
+	ioamoduletypes "github.com/jinpk/gesia/x/ioa/types"
 	"google.golang.org/protobuf/types/known/durationpb"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
@@ -107,6 +110,7 @@ var (
 		consensusparamtypes.ModuleName,
 		circuittypes.ModuleName,
 		// chain modules
+		ioamoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
 
@@ -131,6 +135,7 @@ var (
 		icatypes.ModuleName,
 		ibcfeetypes.ModuleName,
 		// chain modules
+		ioamoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	}
 
@@ -149,6 +154,7 @@ var (
 		icatypes.ModuleName,
 		ibcfeetypes.ModuleName,
 		// chain modules
+		ioamoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	}
 
@@ -297,6 +303,10 @@ var (
 			{
 				Name:   circuittypes.ModuleName,
 				Config: appconfig.WrapAny(&circuitmodulev1.Module{}),
+			},
+			{
+				Name:   ioamoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&ioamodulev1.Module{}),
 			},
 			// this line is used by starport scaffolding # stargate/app/moduleConfig
 		},

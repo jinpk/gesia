@@ -1,0 +1,15 @@
+syntax = "proto3";
+package gesia.ioa;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/jinpk/gesia/x/ioa/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "gesia/x/ioa/Params";
+  option (gogoproto.equal) = true;
+
+  
+}

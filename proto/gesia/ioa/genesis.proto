@@ -1,0 +1,17 @@
+syntax = "proto3";
+package gesia.ioa;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "gesia/ioa/params.proto";
+
+option go_package = "github.com/jinpk/gesia/x/ioa/types";
+
+// GenesisState defines the ioa module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}
