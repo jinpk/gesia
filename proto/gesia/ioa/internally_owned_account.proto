@@ -1,0 +1,15 @@
+syntax = "proto3";
+package gesia.ioa;
+
+
+option go_package = "github.com/jinpk/gesia/x/ioa/types";
+
+// GenesisState defines the ioa module's genesis state.
+message InternallyOwnedAccount {
+    // address of ioa
+    string address = 1; 
+    // address of beneficiary
+    string withdrawal_address = 2; 
+    // contract_address owned
+    string contract_address = 3;
+}
